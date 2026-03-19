@@ -1,0 +1,10 @@
+{
+  "name": "Remix: Remix: Smart Dukaan",
+  "description": "A professional shop management system with real-time inventory, QR billing, expense tracking, and customer management.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "bluetooth",
+    "usb"
+  ]
+}
