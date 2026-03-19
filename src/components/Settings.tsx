@@ -55,6 +55,8 @@ export const Settings = React.memo(({ userProfile, onLogout, onResetData, onUpda
   const [isConnectingDevice, setIsConnectingDevice] = useState(false);
   const [isConnectingPrinter, setIsConnectingPrinter] = useState(false);
   const [isCreatingSignature, setIsCreatingSignature] = useState(false);
+  const [isConfirmingReset, setIsConfirmingReset] = useState(false);
+  const [isConfirmingLogout, setIsConfirmingLogout] = useState(false);
   
   const [newUpi, setNewUpi] = useState(userProfile?.upiId || '');
   const [newShopName, setNewShopName] = useState(userProfile?.shopName || '');
@@ -223,14 +225,14 @@ export const Settings = React.memo(({ userProfile, onLogout, onResetData, onUpda
           <SettingItem
             icon={<Trash2 size={20} />}
             label={t.resetData}
-            onClick={onResetData}
+            onClick={() => setIsConfirmingReset(true)}
             color="rose"
             danger
           />
           <SettingItem
             icon={<LogOut size={20} />}
             label={t.logout}
-            onClick={onLogout}
+            onClick={() => setIsConfirmingLogout(true)}
             color="rose"
             danger
           />
@@ -619,6 +621,96 @@ export const Settings = React.memo(({ userProfile, onLogout, onResetData, onUpda
                 }} 
                 connectedPrinter={connectedPrinter} 
               />
+            </motion.div>
+          </div>
+        )}
+
+        {isConfirmingReset && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              onClick={() => setIsConfirmingReset(false)}
+            />
+            <motion.div
+              variants={modalVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="relative w-full max-w-md overflow-hidden rounded-[2.5rem] bg-white p-8 shadow-2xl"
+            >
+              <div className="mb-6 flex flex-col items-center text-center">
+                <div className="mb-4 rounded-full bg-rose-50 p-4 text-rose-600">
+                  <Trash2 size={32} />
+                </div>
+                <h2 className="mb-2 text-xl font-bold">{t.resetData}</h2>
+                <p className="text-sm text-zinc-500">{t.resetConfirm}</p>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setIsConfirmingReset(false)}
+                  className="flex-1 rounded-2xl bg-zinc-100 py-4 font-bold text-zinc-600 transition-transform active:scale-95"
+                >
+                  {t.cancel}
+                </button>
+                <button
+                  onClick={() => {
+                    onResetData();
+                    setIsConfirmingReset(false);
+                  }}
+                  className="flex-1 rounded-2xl bg-rose-600 py-4 font-bold text-white shadow-lg shadow-rose-100 transition-transform active:scale-95"
+                >
+                  {t.resetData}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {isConfirmingLogout && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              onClick={() => setIsConfirmingLogout(false)}
+            />
+            <motion.div
+              variants={modalVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="relative w-full max-w-md overflow-hidden rounded-[2.5rem] bg-white p-8 shadow-2xl"
+            >
+              <div className="mb-6 flex flex-col items-center text-center">
+                <div className="mb-4 rounded-full bg-rose-50 p-4 text-rose-600">
+                  <LogOut size={32} />
+                </div>
+                <h2 className="mb-2 text-xl font-bold">{t.logout}</h2>
+                <p className="text-sm text-zinc-500">{t.logoutConfirm}</p>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setIsConfirmingLogout(false)}
+                  className="flex-1 rounded-2xl bg-zinc-100 py-4 font-bold text-zinc-600 transition-transform active:scale-95"
+                >
+                  {t.cancel}
+                </button>
+                <button
+                  onClick={() => {
+                    onLogout();
+                    setIsConfirmingLogout(false);
+                  }}
+                  className="flex-1 rounded-2xl bg-rose-600 py-4 font-bold text-white shadow-lg shadow-rose-100 transition-transform active:scale-95"
+                >
+                  {t.logout}
+                </button>
+              </div>
             </motion.div>
           </div>
         )}

@@ -199,6 +199,8 @@ export const translations = {
     goalProgress: 'Goal Progress',
     goalReached: 'Goal Reached!',
     remaining: 'Remaining',
+    resetConfirm: 'Are you sure you want to reset all data? This action cannot be undone.',
+    logoutConfirm: 'Are you sure you want to logout?',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -398,6 +400,8 @@ export const translations = {
     goalProgress: 'लक्ष्य प्रगति',
     goalReached: 'लक्ष्य पूरा हुआ!',
     remaining: 'शेष',
+    resetConfirm: 'क्या आप वाकई सारा डेटा रीसेट करना चाहते हैं? इस क्रिया को पूर्ववत नहीं किया जा सकता।',
+    logoutConfirm: 'क्या आप वाकई लॉगआउट करना चाहते हैं?',
   },
   bn: {
     dashboard: 'ড্যাশবোর্ড',
@@ -597,6 +601,8 @@ export const translations = {
     goalProgress: 'লক্ষ্যের অগ্রগতি',
     goalReached: 'লক্ষ্য অর্জিত হয়েছে!',
     remaining: 'অবশিষ্ট',
+    resetConfirm: 'আপনি কি নিশ্চিত যে আপনি সমস্ত ডেটা রিসেট করতে চান? এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না।',
+    logoutConfirm: 'আপনি কি নিশ্চিত যে আপনি লগআউট করতে চান?',
   },
   mr: {
     dashboard: 'डॅशबोर्ड',
@@ -796,6 +802,8 @@ export const translations = {
     goalProgress: 'ध्येय प्रगती',
     goalReached: 'ध्येय गाठले!',
     remaining: 'उर्वरित',
+    resetConfirm: 'तुम्हाला खात्री आहे की तुम्हाला सर्व डेटा रीसेट करायचा आहे? ही क्रिया पूर्ववत केली जाऊ शकत नाही।',
+    logoutConfirm: 'तुम्हाला खात्री आहे की तुम्हाला लॉगआउट करायचे आहे?',
   },
   as: {
     dashboard: 'ড্যাশবোর্ড',
@@ -995,6 +1003,8 @@ export const translations = {
     goalProgress: 'লক্ষ্যৰ অগ্ৰগতি',
     goalReached: 'লক্ষ্যত উপনীত হ’ল!',
     remaining: 'অৱশিষ্ট',
+    resetConfirm: 'আপুনি নিশ্চিতনে যে আপুনি সকলো তথ্য ৰিচেট কৰিব বিচাৰে? এই কাৰ্যটো পূৰ্বৱৰ্তী কৰিব নোৱাৰি।',
+    logoutConfirm: 'আপুনি নিশ্চিতনে যে আপুনি লগ আউট কৰিব বিচাৰে?',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ',
@@ -1194,5 +1204,7 @@ export const translations = {
     goalProgress: 'લક્ષ્ય પ્રગતિ',
     goalReached: 'લક્ષ્ય પ્રાપ્ત થયું!',
     remaining: 'બાકી',
+    resetConfirm: 'શું તમે ખરેખર બધો ડેટા રીસેટ કરવા માંગો છો? આ ક્રિયા પૂર્વવત્ કરી શકાતી નથી.',
+    logoutConfirm: 'શું તમે ખરેખર લોગ આઉટ કરવા માંગો છો?',
   },
 };

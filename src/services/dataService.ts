@@ -144,5 +144,18 @@ export const dataService = {
     } else {
       saveToStorage(key, [...customers, customer]);
     }
+  },
+
+  async resetData(uid: string): Promise<void> {
+    try {
+      localStorage.removeItem(STORAGE_KEYS.PROFILE + uid);
+      localStorage.removeItem(STORAGE_KEYS.TRANSACTIONS + uid);
+      localStorage.removeItem(STORAGE_KEYS.PRODUCTS + uid);
+      localStorage.removeItem(STORAGE_KEYS.CUSTOMERS + uid);
+      console.log(`Data reset for user: ${uid}`);
+    } catch (err) {
+      console.error("Error resetting data:", err);
+      throw err;
+    }
   }
 };

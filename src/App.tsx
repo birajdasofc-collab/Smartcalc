@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Layout } from './components/Layout';
 import { Dashboard } from './components/Dashboard';
+import { Store } from 'lucide-react';
 import { Sales } from './components/Sales';
 import { Expenses } from './components/Expenses';
 import { Reports } from './components/Reports';
@@ -859,12 +860,29 @@ export default function App() {
   }, [isQRModalOpen, currentSale, confirmSale]);
 
   const handleLogout = React.useCallback(async () => {
-    alert("Logout is disabled in local test mode.");
+    setUser(null);
+    setProfile(null);
+    setTransactions([]);
+    setProducts([]);
+    setCustomers([]);
+    setToast({ message: 'Logged out successfully', type: 'success' });
   }, []);
 
   const handleResetData = React.useCallback(async () => {
-    alert("Resetting data is not supported in this version. Please contact support.");
-  }, []);
+    if (!user) return;
+    try {
+      await dataService.resetData(user.uid);
+      setProfile(null);
+      setTransactions([]);
+      setProducts([]);
+      setCustomers([]);
+      setToast({ message: 'Data reset successfully', type: 'success' });
+      // Reload to re-initialize default profile or go to onboarding
+      window.location.reload();
+    } catch (err) {
+      setToast({ message: 'Failed to reset data', type: 'error' });
+    }
+  }, [user]);
 
   const salesHistory = React.useMemo(() => transactions.filter(tx => tx.type === 'sale'), [transactions]);
   const expenseHistory = React.useMemo(() => transactions.filter(tx => tx.type === 'expense'), [transactions]);
@@ -884,6 +902,24 @@ export default function App() {
 
   if (showSplash) {
     return <SplashScreen onFinish={() => setShowSplash(false)} />;
+  }
+
+  if (!user) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 p-8 text-center">
+        <div className="mb-8 rounded-full bg-emerald-100 p-6 text-emerald-600">
+          <Store size={48} />
+        </div>
+        <h1 className="mb-2 text-2xl font-bold text-zinc-900">{t.welcome}</h1>
+        <p className="mb-8 text-zinc-500">{t.loginToManage}</p>
+        <button
+          onClick={() => handleLogin({ uid: 'test-user', displayName: 'Test User' })}
+          className="w-full max-w-xs rounded-2xl bg-emerald-600 py-4 font-bold text-white shadow-lg shadow-emerald-100 transition-transform active:scale-95"
+        >
+          {t.useDemoLogin}
+        </button>
+      </div>
+    );
   }
 
   if (loading) {
